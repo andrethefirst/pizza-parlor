@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/scripts.js"></script>
+    <title>Pizza Parlor</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Andre's Pizzeria</h1>
+      <form id="pizza">
+        <label for="size">What size pizza would you like?</label>
+        <select id="size" required>
+          <option value="small">Small</option>
+          <option value="medium">Medium</option>
+          <option value="large">Large</option>
+        </select>
+        
+        <label for="topping-one">Choose a topping</label>
+        <select id="topping-one" required>
+          <option value="pepperoni">Pepperoni</option>
+          <option value="olives">Olives</option>
+          <option value="pineapple">Pineapple</option>
+        </select>
+
+        <label for="topping-two">Choose a second topping</label>
+        <select id="topping-two">
+          <option value="pepperoni">Pepperoni</option>
+          <option value="olives">Olives</option>
+          <option value="pineapple">Pineapple</option>
+        </select>
+
+
+        <button type="submit" class="btn">Place Order!</button>
+      </form>
+
+
+      <div id="result">
+        <p>Your pizza will cost you $<span id="price"></span>! I hope you enjoy your pizza!</p>
+      </div>
+    </div>
+  </body>
+</html>
