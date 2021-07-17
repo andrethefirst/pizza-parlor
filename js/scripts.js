@@ -3,8 +3,16 @@
 function PizzaOrder(size, topping, secondtopping) {
   this.size = size;
   this.topping = topping;
-  this.secondtopping =secondtopping;
+  this.secondtopping = secondtopping;
+  this.price = 0;
 }
+
+PizzaOrder.prototype.findPizza = function(id) {
+  if (this.pizzas[id] != undefined) {
+    return this.pizzas[id];
+  }
+  return false;
+};
 
 PizzaOrder.prototype.addSize = function(sizing) {
   sizing.id = this.sizePrice();
@@ -13,13 +21,13 @@ PizzaOrder.prototype.addSize = function(sizing) {
 
 PizzaOrder.prototype.sizePrice = function() {
   if (this.size === "small"){
-    this.price + 2;
+    this.price += 2;
   } else if (this.size === "medium"){
-    this.price + 3;
+    this.price += 3;
   } else if (this.size === "large"){
-    this.price + 4;
+    this.price += 4;
   }
-}
+};
 
 PizzaOrder.prototype.addToppingOne = function(firsttop) {
   firsttop.id = this.topOnePrice();
@@ -28,11 +36,9 @@ PizzaOrder.prototype.addToppingOne = function(firsttop) {
 
 PizzaOrder.prototype.topOnePrice = function() {
   if (this.topping === "pepperoni"){
-    this.price + 1;
+    this.price += 1;
   } else if (this.topping === "olives"){
-    this.price + 1;
-  } else if (this.topping === "pineapple"){
-    this.price + 1;
+    this.price += 1;
   }
 }
 
@@ -46,32 +52,53 @@ PizzaOrder.prototype.topTwoPrice = function() {
     this.price + 1;
   } else if (this.secondtopping === "olives"){
     this.price + 1;
-  } else if (this.secondtopping === "pineapple"){
-    this.price + 1;
+  } else if (this.secondtopping === "none"){
+    this.price + 0;
   }
 }
 
-
+PizzaOrder.prototype.pizzaPrice = function() {
+  this.sizePrice + this.topOnePrice + this.topTwoPrice
+}
 
 // User Interface Logic--
 
 let pizzaOrder = new PizzaOrder();
 
+function displayPizza(pizzaToDisplay) {
+  let pizzas = $("ul#finalorder");
+  let htmlforPizzaInfo = "";
+  Object.keys(pizzaToDisplay).forEach(function(key) {
+    const pizzaOrders =pizzaToDisplay.findPizza(key)
+    htmlforPizzaInfo += "<li id=" + pizzaOrders.id + ">" + pizzaOrders.size + " " + pizzaOrders.topping + " " + pizzaOrders.secondtopping + "</li>"
+  });
+  pizzas.html(htmlforPizzaInfo);
+};
 
-
-
-
+function showPizza(pizzaId) {
+  const pizza = pizzaOrder.findPizza(pizzaId);
+  $("#finalorder").show();
+  $(".size").html(pizza.size);
+  $(".topping-one").html(pizza.topping);
+  $(".topping-two").html(pizza.secondtopping);
+}
 
 
 $(document).ready(function() {
+  showPizza();
   $('form#pizza').submit(function(event) {
     event.preventDefault();
     const inputtedSize = $("input#size").val();
     const inputtedTopping = $("input#topping-one").val();
     const inputtedToppingTwo = $("input#topping-two").val();
 
+    $("input#size").val("");
+    $("input#topping-one").val("");
+    $("input#topping-two").val("");
+
 
     let newPizza = new PizzaOrder(inputtedSize, inputtedTopping, inputtedToppingTwo);
     pizzaOrder.makePizza(newPizza);
+    displayPizza(pizzaOrder)
   });
 })
