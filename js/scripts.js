@@ -99,6 +99,9 @@ $(document).ready(function() {
 
     let newPizza = new PizzaOrder(inputtedSize, inputtedTopping, inputtedToppingTwo);
     pizzaOrder.makePizza(newPizza);
-    displayPizza(pizzaOrder)
+    const finalPizza = displayPizza(pizzaOrder)
+
+    $("#price").text(finalPizza);
+    $("#result").show();
   });
 })

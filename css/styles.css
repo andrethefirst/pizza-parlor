@@ -5,3 +5,30 @@
 .btn {
   display: block;
 }
+
+h1 {
+  text-align: center;
+  color: white;
+}
+
+body {
+  background: black;
+}
+
+h2 {
+  color: white;
+}
+
+label {
+  color: white;
+}
+
+p {
+  color: white;
+}
+
+img {
+  max-width: 60%;
+  height: auto;
+  float: right;
+}
